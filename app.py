@@ -51,7 +51,7 @@ app.layout = [html.H1('Hello, look at this graph'),
               html.H3('Interactivity time'), 
               dcc.Dropdown(['Malaysia', 'Indonesia', 'China'], 'Malaysia', id='dropdown-count'), 
               dcc.Graph(id='graph-scatter'), 
-              dcc.Graph(figure=fig2)]
+              dcc.Graph(id="graph-pie")]
 
 if __name__ == '__main__':
     app.run(debug=True)
