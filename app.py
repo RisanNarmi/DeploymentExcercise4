@@ -16,7 +16,7 @@ fig2 = px.pie(pie_df, values="gdp", names="continent")
 # layout set
 app.layout = [html.H1('Hello, look at this graph'), 
               html.H3('Interactivity time'), 
-              dcc.Dropdown(['Malaysia, Indonesia, China'], 'Malaysia', id='dropdown-count']), 
+              dcc.Dropdown(['Malaysia, Indonesia, China'], 'Malaysia', id='dropdown-count'), 
               dcc.Graph(id='graph-scatter'), 
               dcc.Graph(figure=fig2)]
 
