@@ -9,10 +9,6 @@ server = app.server
 # Reading data
 df = pd.read_csv("https://raw.githubusercontent.com/RisanNarmi/DeploymentExcercise4/main/gdp_1960_2020.csv")
 
-# setting figures
-fig = px.scatter(subCountry, x="year", y="gdp")
-fig2 = px.pie(pie_df, values="gdp", names="continent")
-
 # layout set
 app.layout = [html.H1('Hello, look at this graph'), 
               html.H3('Interactivity time'), 
@@ -32,13 +28,16 @@ pie_data = sum(subASIA_Year["gdp"]), sum(subEU_Year["gdp"]), sum(subOCE_Year["gd
 pie_df = {"continent":chart_Lable,
          "gdp":pie_data}
 
+# setting figures
+fig2 = px.pie(pie_df, values="gdp", names="continent")
+
 @callback(
     Output('graph-scatter', 'figure'),
     Input('dropdown-count', 'value')
 )
 def update_graph(sel):
     subCountry = df[df["country"].isin(["sel"])]
-    fig = px.scatter(subset_Country, x="year", y="gdp")
+    fig = px.scatter(subCountry, x="year", y="gdp")
     return fig
 
 
