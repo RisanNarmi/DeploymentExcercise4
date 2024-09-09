@@ -11,11 +11,11 @@ df = pd.read_csv("https://raw.githubusercontent.com/RisanNarmi/DeploymentExcerci
 
 # Setting Paramaters
 subYear = df[df["year"].isin([2020])]
-subASIA_Year = sub2020[sub2020['state'].isin(['Asia'])]
-subEU_Year = sub2020[sub2020['state'].isin(['Europe'])]
-subOCE_Year = sub2020[sub2020['state'].isin(['Oceania'])]
-subAMERICAS_Year = sub2020[sub2020['state'].isin(['America'])]
-subAFRICA_Year = sub2020[sub2020['state'].isin(['Africa'])]
+subASIA_Year = subYear[subYear['state'].isin(['Asia'])]
+subEU_Year = subYear[subYear['state'].isin(['Europe'])]
+subOCE_Year = subYear[subYear['state'].isin(['Oceania'])]
+subAMERICAS_Year = subYear[subYear['state'].isin(['America'])]
+subAFRICA_Year = subYear[subYear['state'].isin(['Africa'])]
 chart_Lable = ["Asia", "Europe", "Oceania", "Americas", "Africa"]
 pie_data = sum(subASIA_Year["gdp"]), sum(subEU_Year["gdp"]), sum(subOCE_Year["gdp"]), sum(subAMERICAS_Year["gdp"]), sum(subAFRICA_Year["gdp"])
 pie_df = {"continent":chart_Lable,
