@@ -9,13 +9,6 @@ server = app.server
 # Reading data
 df = pd.read_csv("https://raw.githubusercontent.com/RisanNarmi/DeploymentExcercise4/main/gdp_1960_2020.csv")
 
-# layout set
-app.layout = [html.H1('Hello, look at this graph'), 
-              html.H3('Interactivity time'), 
-              dcc.Dropdown(['Malaysia, Indonesia, China'], 'Malaysia', id='dropdown-count'), 
-              dcc.Graph(id='graph-scatter'), 
-              dcc.Graph(figure=fig2)]
-
 # Setting Paramaters
 subYear = df[df["year"].isin([2020])]
 subASIA_Year = sub2020[sub2020['state'].isin(['Asia'])]
@@ -40,6 +33,12 @@ def update_graph(sel):
     fig = px.scatter(subCountry, x="year", y="gdp")
     return fig
 
+# layout set
+app.layout = [html.H1('Hello, look at this graph'), 
+              html.H3('Interactivity time'), 
+              dcc.Dropdown(['Malaysia, Indonesia, China'], 'Malaysia', id='dropdown-count'), 
+              dcc.Graph(id='graph-scatter'), 
+              dcc.Graph(figure=fig2)]
 
 if __name__ == '__main__':
     app.run(debug=True)
