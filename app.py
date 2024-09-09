@@ -39,6 +39,8 @@ app.layout = [html.H1('Hello, look at this graph'),
               html.H3('Interactivity time'), 
               dcc.Dropdown(['Malaysia', 'Indonesia', 'China'], 'Malaysia', id='dropdown-count'), 
               dcc.Graph(id='graph-scatter'), 
+              dcc.Dropdown([{'label':'2020', 'value':2020}, {'label':'2010', 'value':2010}, 
+                            {'label':'2000', 'value':2000}], 2020, id='dropdown-year'),
               dcc.Graph(id="graph-pie")]
 
 if __name__ == '__main__':
