@@ -17,7 +17,7 @@ df = pd.read_csv("https://raw.githubusercontent.com/RisanNarmi/DeploymentExcerci
     Input('dropdown-year', 'value'),
 )
 def update_graph(sel, yer):
-    subCountry = df[df["country"].isin(["sel"])]
+    subCountry = df[df["country"].isin([sel])]
     fig = px.scatter(subCountry, x="year", y="gdp")
 
     subYear = df[df["year"].isin([yer])]
