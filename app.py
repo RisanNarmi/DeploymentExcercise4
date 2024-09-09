@@ -9,18 +9,6 @@ server = app.server
 # Reading data
 df = pd.read_csv("https://raw.githubusercontent.com/RisanNarmi/DeploymentExcercise4/main/gdp_1960_2020.csv")
 
-# Setting Paramaters
-subYear = df[df["year"].isin([2020])]
-subASIA_Year = subYear[subYear['state'].isin(['Asia'])]
-subEU_Year = subYear[subYear['state'].isin(['Europe'])]
-subOCE_Year = subYear[subYear['state'].isin(['Oceania'])]
-subAMERICAS_Year = subYear[subYear['state'].isin(['America'])]
-subAFRICA_Year = subYear[subYear['state'].isin(['Africa'])]
-chart_Lable = ["Asia", "Europe", "Oceania", "Americas", "Africa"]
-pie_data = sum(subASIA_Year["gdp"]), sum(subEU_Year["gdp"]), sum(subOCE_Year["gdp"]), sum(subAMERICAS_Year["gdp"]), sum(subAFRICA_Year["gdp"])
-pie_df = {"continent":chart_Lable,
-         "gdp":pie_data}
-
 # setting figures
 @callback(
     Output('graph-scatter', 'figure'),
@@ -28,11 +16,11 @@ pie_df = {"continent":chart_Lable,
     Input('dropdown-count', 'value'),
     Input('dropdown-year', 'value'),
 )
-def update_graph(sel):
+def update_graph(sel, yer):
     subCountry = df[df["country"].isin(["sel"])]
     fig = px.scatter(subCountry, x="year", y="gdp")
 
-    subYear = df[df["year"].isin([2020])]
+    subYear = df[df["year"].isin([yer])]
     subASIA_Year = subYear[subYear['state'].isin(['Asia'])]
     subEU_Year = subYear[subYear['state'].isin(['Europe'])]
     subOCE_Year = subYear[subYear['state'].isin(['Oceania'])]
