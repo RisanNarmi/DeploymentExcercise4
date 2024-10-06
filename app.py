@@ -9,7 +9,7 @@ app.title = "MCM7183 Exercise 3"
 server = app.server
 
 # Reading data
-df = pd.read_csv("https://raw.githubusercontent.com/RisanNarmi/DeploymentExcercise4/main/gdp_1960_2020.csv")
+df = pd.read_csv("https://raw.githubusercontent.com/RisanNarmi/ImranNasir_242PM243TP_DeploymentExcercise3/refs/heads/main/gdp_1960_2020.csv")
 
 # setting figures
 @callback(
