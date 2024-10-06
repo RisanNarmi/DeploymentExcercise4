@@ -15,12 +15,10 @@ df = pd.read_csv("https://raw.githubusercontent.com/RisanNarmi/ImranNasir_242PM2
 @callback(
     Output('graph-scatter', 'figure'),
     Output('graph-pie', 'figure'),
-    Output('graph-pie2', 'figure'),
     Input('dropdown-count', 'value'),
     Input('dropdown-year', 'value'),
-    Input('slider-year', 'value')
 )
-def update_graph(sel, yer, yerslide):
+def update_graph(sel, yer):
     subCountry = df[df["country"].isin([sel])]
     fig = px.scatter(subCountry, x="year", y="gdp")
 
@@ -36,20 +34,7 @@ def update_graph(sel, yer, yerslide):
               "gdp":pie_data}
     fig2 = px.pie(pie_df, values="gdp", names="continent")
 
-    subYear = df[df["year"].isin([yerslide])]
-    subASIA_Year = subYear[subYear['state'].isin(['Asia'])]
-    subEU_Year = subYear[subYear['state'].isin(['Europe'])]
-    subOCE_Year = subYear[subYear['state'].isin(['Oceania'])]
-    subAMERICAS_Year = subYear[subYear['state'].isin(['America'])]
-    subAFRICA_Year = subYear[subYear['state'].isin(['Africa'])]
-    chart_Lable = ["Asia", "Europe", "Oceania", "Americas", "Africa"]
-    pie_data = sum(subASIA_Year["gdp"]), sum(subEU_Year["gdp"]), sum(subOCE_Year["gdp"]), sum(subAMERICAS_Year["gdp"]), sum(subAFRICA_Year["gdp"])
-    pie_df = {"continent":chart_Lable,
-              "gdp":pie_data}
-    fig3 = px.pie(pie_df, values="gdp", names="continent")
-    
-
-    return fig, fig2, fig3
+    return fig, fig2
 
 # layout set
 app.layout = [html.H1('Hello, look at this graph'), 
