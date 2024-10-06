@@ -2,7 +2,6 @@ from dash import Dash, html, dcc, callback, Input, Output # dcc is dash componen
 import numpy as np 
 import pandas as pd 
 import plotly.express as px
-import dash_bootstrap_components as dbc
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.CERULEAN])
 app.title = "MCM7183 Exercise 3"
