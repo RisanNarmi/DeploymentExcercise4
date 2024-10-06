@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd 
 import plotly.express as px
 
-app = Dash(__name__, external_stylesheets=[dbc.themes.CERULEAN])
+app = Dash(__name__,)
 app.title = "MCM7183 Exercise 3"
 server = app.server
 
