@@ -1,9 +1,11 @@
 from dash import Dash, html, dcc, callback, Input, Output # dcc is dash component
-import numpy as np # linear algebra
-import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
+import numpy as np 
+import pandas as pd 
 import plotly.express as px
+import dash_bootstrap_components as dbc
 
-app = Dash(__name__)
+app = Dash(__name__, external_stylesheets=[dbc.themes.CERULEAN])
+app.title = "MCM7183 Exercise 3"
 server = app.server
 
 # Reading data
@@ -52,13 +54,13 @@ def update_graph(sel, yer, yerslide):
 # layout set
 app.layout = [html.H1('Hello, look at this graph'), 
               html.H3('Interactivity time'), 
-              dcc.Dropdown(['Malaysia', 'Indonesia', 'China'], 'Malaysia', id='dropdown-count'), 
-              dcc.Graph(id='graph-scatter'), 
-              dcc.Dropdown([{'label':'2020', 'value':2020}, {'label':'2010', 'value':2010}, 
-                            {'label':'2000', 'value':2000}], 2020, id='dropdown-year'),
+              dcc.Dropdown(['Malaysia', 'Indonesia', 'China'], 'Malaysia', id='dropdown-country'),
+              dcc.Graph(id="graph-scatter"), 
+              #dcc.Dropdown([{'label':'2020', 'value':2020}, {'label':'2010', 'value':2010}, 
+              #              {'label':'2000', 'value':2000}], 2020, id='dropdown-year'),
+              dcc.Slider(1960, 2020, 5, value=2020, id='slider-year',
+                         marks = {i: str(i) for i in range(1960, 2021, 5)}),
               dcc.Graph(id="graph-pie")]
-              dcc.Slider(1960, 2020, 5, value=2020, id='slider-year'),
-              dcc.Graph(id="graph-pie2")]
 
 if __name__ == '__main__':
     app.run(debug=True)
