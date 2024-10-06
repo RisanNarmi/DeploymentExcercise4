@@ -10,31 +10,6 @@ server = app.server
 # Reading data
 df = pd.read_csv("https://raw.githubusercontent.com/RisanNarmi/ImranNasir_242PM243TP_DeploymentExcercise3/refs/heads/main/gdp_1960_2020.csv")
 
-# setting figures
-@callback(
-    Output('graph-scatter', 'figure'),
-    Output('graph-pie', 'figure'),
-    Input('dropdown-count', 'value'),
-    Input('dropdown-year', 'value'),
-)
-def update_graph(sel, yer):
-    subCountry = df[df["country"].isin([sel])]
-    fig = px.scatter(subCountry, x="year", y="gdp")
-
-    subYear = df[df["year"].isin([yer])]
-    subASIA_Year = subYear[subYear['state'].isin(['Asia'])]
-    subEU_Year = subYear[subYear['state'].isin(['Europe'])]
-    subOCE_Year = subYear[subYear['state'].isin(['Oceania'])]
-    subAMERICAS_Year = subYear[subYear['state'].isin(['America'])]
-    subAFRICA_Year = subYear[subYear['state'].isin(['Africa'])]
-    chart_Lable = ["Asia", "Europe", "Oceania", "Americas", "Africa"]
-    pie_data = sum(subASIA_Year["gdp"]), sum(subEU_Year["gdp"]), sum(subOCE_Year["gdp"]), sum(subAMERICAS_Year["gdp"]), sum(subAFRICA_Year["gdp"])
-    pie_df = {"continent":chart_Lable,
-              "gdp":pie_data}
-    fig2 = px.pie(pie_df, values="gdp", names="continent")
-
-    return fig, fig2
-
 # layout set
 app.layout = [html.H1('Hello, look at this graph'), 
               html.H3('Interactivity time'), 
@@ -45,6 +20,32 @@ app.layout = [html.H1('Hello, look at this graph'),
               dcc.Slider(1960, 2020, 5, value=2020, id='slider-year',
                          marks = {i: str(i) for i in range(1960, 2021, 5)}),
               dcc.Graph(id="graph-pie")]
+
+# setting figures
+@callback(
+    Output('graph-scatter', 'figure'),
+    Output('graph-pie', 'figure'),
+    Input('dropdown-country', 'value'),
+    Input('slider-year', 'value')
+)
+
+def update_graph(country_selected, year_selected):
+    subset_Country = df[df['country'].isin([country_selected])]
+    fig = px.scatter(subset_Country, x="year", y="gdp")
+
+    subset_Year = df[df['year'].isin([year_selected])]
+    subset_Year_Asia = subset_Year[subset_Year['state'].isin(["Asia"])]
+    subset_Year_Africa = subset_Year[subset_Year['state'].isin(["Africa"])]
+    subset_Year_America = subset_Year[subset_Year['state'].isin(["America"])]
+    subset_Year_Europe = subset_Year[subset_Year['state'].isin(["Europe"])]
+    subset_Year_Oceania = subset_Year[subset_Year['state'].isin(["Oceania"])]
+    pie_data = [sum(subset_Year_Asia['gdp']),sum(subset_Year_Africa['gdp']),sum(subset_Year_America['gdp']),sum(subset_Year_Europe['gdp']),sum(subset_Year_Oceania['gdp'])];
+    mylabels = ["Asia", "Africa", "America", "Europe","Oceania"]
+    pie_df = {'Continent': mylabels,'GDP': pie_data}
+    fig2 = px.pie(pie_df,values="GDP",names="Continent")
+    fig2.update_traces(sort=False) 
+
+    return fig, fig2
 
 if __name__ == '__main__':
     app.run(debug=True)
